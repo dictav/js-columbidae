@@ -19,7 +19,7 @@ var config = {
 }
 
 export default {
-  moduleName: 'HelloStackDriver',
+  moduleName: 'SimpleErrorReporter',
   entry: 'src/main.js',
   dest: 'dist/bundle.js',
   format: 'umd',
