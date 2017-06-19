@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <script src="https://cdn.ravenjs.com/3.16.0/raven.min.js" crossorigin="anonymous"></script>
+  <script src="./dist/bundle.js"></script>
+  <script>
+Raven.config('https://29e7a7d54fcd4390b30f712566c14d6c@sentry.io/180924').install();
+
+try {
+  SimpleErrorReporter.Crash("Sentry Error Reporting");
+} catch(e) {
+  Raven.captureException(e)
+}
+  </script>
+  
+</body>
+</html>
