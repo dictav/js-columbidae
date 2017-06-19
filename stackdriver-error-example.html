@@ -6,7 +6,6 @@
 </head>
 <body>
   <script src="https://cdn.rawgit.com/GoogleCloudPlatform/stackdriver-errors-js/v0.0.7/dist/stackdriver-errors-concat.min.js"></script>
-  <script src="./dist/bundle.js"></script>
   <script type="text/javascript">
 var errorHandler = new StackdriverErrorReporter();
 errorHandler.start({
@@ -14,7 +13,7 @@ errorHandler.start({
   projectId: 'dictav-net'
 });
 
-SimpleErrorReporter.Crash("HELLO, stackdriver-error.js");
+(function testErrorReporting() {window.onerror(null, null, null, null, new Error('Test: Something broke!'));})();
   </script>
 
 </body>
