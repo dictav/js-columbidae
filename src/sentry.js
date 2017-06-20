@@ -24,14 +24,14 @@ function Sentry(config) {
           "stacktrace": {
             "frames": [
               {
-                "filename": "http://localhost:3000/sentry-raven-example.html",
+                "filename": "http://dictav.net/js-simple-error-reporter/index.html",
                 "lineno": 17,
                 "colno": 23,
                 "function": "?",
                 "in_app": true
               },
               {
-                "filename": "http://localhost:3000/dist/bundle.js",
+                "filename": "http://dictav.net/js-simple-error-reporter//dist/bundle.js",
                 "lineno": 4,
                 "colno": 587,
                 "function": "Object.e.Crash",
