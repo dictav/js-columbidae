@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Trace</title>
+</head>
+<body>
+  <script src="/dist/bundle.js"></script>
+  <script>
+var msg = '';
+try {
+  SimpleErrorReporter.Crash("good-bye");
+} catch(err) {
+  msg += err.stack
+  console.log(msg)
+}
+document.write(msg)
+  </script>
+</body>
+</html>

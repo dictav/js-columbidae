@@ -1,5 +1,6 @@
 import StackDriver from './stackdriver'
 import Sentry from './sentry'
+import crash from './util'
 
 function hello() {
   /*@cc_on return false;@*/
@@ -16,7 +17,7 @@ export function HelloStackDriver(config){
 }
 
 export function Crash(str) {
-  throw new Error(str);
+  crash(str)
 }
 
 export function HelloSentry(config){
