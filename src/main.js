@@ -2,7 +2,7 @@ import StackDriver from './stackdriver'
 import Sentry from './sentry'
 import crash from './util'
 
-function hello() {
+export function hello() {
   /*@cc_on return false;@*/
   throw new Error("Hello, My StackdriverJS!");
 }
