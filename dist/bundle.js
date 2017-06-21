@@ -1,3 +1,106 @@
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t(e.ColumbidaeJS=e.ColumbidaeJS||{})}(this,function(e){"use strict";function t(e){var t=e.stack.toString();return console.log(t),t}function r(e){this.url=c+e.projectId+"/events:report?key="+e.key,this.payload={serviceContext:{service:e.service,version:e.version},context:{httpRequest:{userAgent:window.navigator.userAgent,url:window.location.href,referrer:document.referrer}}}}function n(e){return"hoge"+e}function o(e){return n(e)+"piyo"}function s(e){throw new Error(o(e))}function i(e){var t=null;return"string"==typeof e.stack&&(t=a(e.stack)),{type:"Error",value:e.message,stacktrace:t}}function a(e){var t=[];return[u,p].forEach(function(r){if(!(t.length>0))for(var n=null;null!=(n=r.exec(e));){var o=n[1].trim();0==o.length&&(o="?");var s=n[2];t.unshift({"function":o,filename:s,lineno:parseInt(n[3]),colno:parseInt(n[4])})}}),0==t.length?null:{frames:t}}function l(e){this.url="https://sentry.io/api/"+e.projectId+"/store/?sentry_version=7&sentry_client=simple-reporter%2F"+d+"&sentry_key="+e.key,this.payload={project:e.projectId,logger:"javascript",platform:"javascript",request:{headers:{"User-Agent":navigator.userAgent},url:window.location.href},exception:{values:[]},extra:{"session:duration":0}}}var c="https://clouderrorreporting.googleapis.com/v1beta1/projects/";r.prototype.send=function(e){if(this.payload.message=t(e),navigator.sendBeacon)navigator.sendBeacon(this.url,JSON.stringify(this.payload));else{var r=new XMLHttpRequest;r.open("POST",this.url,!0),r.send(JSON.stringify(this.payload))}};var u=/at(.*) \(?(.+):(\d+):(\d+)/g,p=/(.*)@(.+):(\d+):(\d+)/g,d="0.0.1";l.prototype.send=function(e){if(this.payload.exception.values.push(i(e)),navigator.sendBeacon)navigator.sendBeacon(this.url,JSON.stringify(this.payload));else{console.log("sentry",this.payload);var t=new XMLHttpRequest;t.open("POST",this.url,!0),t.send(JSON.stringify(this.payload))}},e.hello=function(){/*@cc_on return false;@*/
-throw new Error("Hello, My StackdriverJS!")},e.HelloStackDriver=function(e){var t=new r(e);try{throw new Error("Whats wrong!!!")}catch(n){t.send(n)}},e.Crash=function(e){s(e)},e.HelloSentry=function(e,t){var r=new l(e);try{console.log("crash"),s(t)}catch(n){console.log("err",n),r.send(n)}},Object.defineProperty(e,"__esModule",{value:!0})});
+!function(e, t) {
+    "object" == typeof exports && "undefined" != typeof module ? t(exports) : "function" == typeof define && define.amd ? define([ "exports" ], t) : t(e.ColumbidaeJS = e.ColumbidaeJS || {});
+}(this, function(e) {
+    "use strict";
+    function t(e) {
+        return "hoge" + e;
+    }
+    function n(e) {
+        return t(e) + "piyo";
+    }
+    function r(e) {
+        throw new Error(n(e));
+    }
+    function i(e, t) {
+        if ("undefined" != typeof navigator.sendBeacon) return navigator.sendBeacon(e, t);
+        var n = /*@cc_on @if (@_jscript_version < 10) window.XDomainRequest || @end @*/ window.XMLHttpRequest;
+        if (void 0 === n) return flase;
+        var r = new n();
+        return r.open("POST", e, !0), r.send(t), !0;
+    }
+    function o() {
+        var e = window.crypto || window.msCrypto;
+        if (void 0 !== e && e.getRandomValues) {
+            var t = new Uint16Array(8);
+            e.getRandomValues(t), t[3] = 4095 & t[3] | 16384, t[4] = 16383 & t[4] | 32768;
+            var n = function(e) {
+                for (var t = e.toString(16); t.length < 4; ) t = "0" + t;
+                return t;
+            };
+            return n(t[0]) + n(t[1]) + n(t[2]) + n(t[3]) + n(t[4]) + n(t[5]) + n(t[6]) + n(t[7]);
+        }
+        return "xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g, function(e) {
+            var t = 16 * Math.random() | 0;
+            return ("x" === e ? t : 3 & t | 8).toString(16);
+        });
+    }
+    function a(e) {
+        var t = null;
+        return "string" == typeof e.stack && (t = u(e.stack)), {
+            type: "Error",
+            value: e.message,
+            stacktrace: t
+        };
+    }
+    function u(e) {
+        var t = [];
+        return [ d, f ].forEach(function(n) {
+            if (!(t.length > 0)) for (var r = null; null != (r = n.exec(e)); ) {
+                var i = r[1].trim();
+                0 == i.length && (i = "?");
+                var o = r[2];
+                t.unshift({
+                    "function": i,
+                    filename: o,
+                    lineno: parseInt(r[3]),
+                    colno: parseInt(r[4])
+                });
+            }
+        }), 0 == t.length ? null : {
+            frames: t
+        };
+    }
+    function s(e) {
+        /*@cc_on
+  @if (@_jscript_version < 5.8) throw new Error('This library does not support IE8-'); @end
+  @if (@_jscript_version < 10) if (window.location.protocol !== 'https:') throw new Error('Sentry.io supports https only'); @end
+  @*/
+        if ("undefined" == typeof e.uuidv4) throw new Error("uuidv4 is required");
+        this.start = new Date().getTime(), this.uuidv4 = e.uuidv4, this.sendBeacon = e.sendBeacon, 
+        this.url = "//sentry.io/api/" + e.projectId + "/store/?sentry_version=7&sentry_client=simple-reporter%2F" + c + "&sentry_key=" + e.key, 
+        this.payload = {
+            project: e.projectId,
+            logger: "javascript",
+            platform: "javascript",
+            request: {
+                headers: {
+                    "User-Agent": navigator.userAgent
+                },
+                url: window.location.href
+            },
+            exception: {
+                values: []
+            },
+            extra: {
+                "session:duration": 0
+            }
+        };
+    }
+    var d = /at(.*) \(?(.+):(\d+):(\d+)/g, f = /(.*)@(.+):(\d+):(\d+)/g, c = "0.0.1";
+    s.prototype.send = function(e) {
+        var t = this.uuidv4();
+        return this.payload.exception.values.push(a(e)), this.payload.extra["session:duration"] = new Date().getTime() - this.start, 
+        this.payload.event_id = t, i(this.url, JSON.stringify(this.payload)), t;
+    }, e.Crash = function(e) {
+        r(e);
+    }, e.HelloSentry = function(e, t) {
+        e.uuidv4 = o;
+        var n = new s(e);
+        try {
+            r(t);
+        } catch (i) {
+            return n.send(i);
+        }
+    };
+});
 //# sourceMappingURL=bundle.js.map

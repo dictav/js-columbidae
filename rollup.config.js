@@ -1,3 +1,4 @@
+import json from 'rollup-plugin-json'
 import uglify from 'rollup-plugin-uglify'
 
 import pkg from './package.json'
@@ -16,6 +17,7 @@ var config = {
   toplevel: false,
   ie8: true,
   output: {
+    beautify: true,
     comments: 'some'
   }
 }
@@ -26,7 +28,9 @@ export default {
   dest: 'dist/bundle.js',
   format: 'umd',
   sourceMap: true,
+  legacy: true,
   plugins: [
+    json(),
     uglify(config)
   ]
 };
