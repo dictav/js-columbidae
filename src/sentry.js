@@ -1,5 +1,7 @@
-var VERSION = '0.0.1'
-var duration = 120// duration from start
+import { extractException } from './util'
+
+var VERSION = '0.0.1';
+var duration = 120;  // duration from start
 
 function Sentry(config) {
   this.url = "https://sentry.io/api/" + config.projectId + "/store/"
@@ -17,30 +19,7 @@ function Sentry(config) {
       "url": window.location.href
     },
     "exception": {
-      "values": [
-        {
-          "type": "Error",
-          "value": 'initial message',
-          "stacktrace": {
-            "frames": [
-              {
-                "filename": "http://dictav.net/js-simple-error-reporter/index.html",
-                "lineno": 17,
-                "colno": 23,
-                "function": "?",
-                "in_app": true
-              },
-              {
-                "filename": "http://dictav.net/js-simple-error-reporter//dist/bundle.js",
-                "lineno": 4,
-                "colno": 587,
-                "function": "Object.e.Crash",
-                "in_app": true
-              }
-            ]
-          }
-        }
-      ]
+      "values": []
     },
     "extra": {
       "session:duration": 0
@@ -49,12 +28,14 @@ function Sentry(config) {
 }
 
 Sentry.prototype.send = function(err) {
-  this.payload.exception.values[0].value = err.message;
+  this.payload.exception.values.push(extractException(err));
 
   if (navigator.sendBeacon) {
     navigator.sendBeacon(this.url, JSON.stringify(this.payload))
     return;
   }
+
+  console.log('sentry', this.payload);
 
   var xhr = new XMLHttpRequest();
   xhr.open('POST', this.url, true);

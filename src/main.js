@@ -20,11 +20,13 @@ export function Crash(str) {
   crash(str)
 }
 
-export function HelloSentry(config){
+export function HelloSentry(config, msg){
   var st = new Sentry(config);
   try {
-    throw new Error("Whats wrong!");
+    console.log('crash');
+    crash(msg)
   } catch(err) {
+    console.log('err', err);
     st.send(err);
   }
 }

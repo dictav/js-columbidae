@@ -1,7 +1,6 @@
 import uglify from 'rollup-plugin-uglify'
 
 import pkg from './package.json'
-console.log(pkg)
 
 var config = {
   warnings: false,

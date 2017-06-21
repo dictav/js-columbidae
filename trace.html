@@ -9,12 +9,14 @@
   <script>
 var msg = '';
 try {
-  SimpleErrorReporter.Crash("good-bye");
+  ColumbidaeJS.Crash("good-bye");
 } catch(err) {
   msg += err.stack
   console.log(msg)
 }
+document.write('<pre>')
 document.write(msg)
+document.write('</pre>')
   </script>
 </body>
 </html>

@@ -14,7 +14,7 @@
 Raven.config('https://29e7a7d54fcd4390b30f712566c14d6c@sentry.io/180924').install();
 
 try {
-  SimpleErrorReporter.Crash("Sentry Error Reporting");
+  ColumbidaeJS.Crash("Sentry Error Reporting");
 } catch(e) {
   Raven.captureException(e)
 }
