@@ -1,4 +1,7 @@
-import uglify from 'rollup-plugin-uglify';
+import uglify from 'rollup-plugin-uglify'
+
+import pkg from './package.json'
+console.log(pkg)
 
 var config = {
   warnings: false,
@@ -19,7 +22,7 @@ var config = {
 }
 
 export default {
-  moduleName: 'SimpleErrorReporter',
+  moduleName: pkg.name,
   entry: 'src/main.js',
   dest: 'dist/bundle.js',
   format: 'umd',

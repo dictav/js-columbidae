@@ -1,5 +1,5 @@
 {
-  "name": "js-simple-error-reporter",
+  "name": "ColumbidaeJS",
   "version": "0.0.1",
   "description": "Error reporter for Stackdriver or Sentry",
   "main": "src/main.js",
