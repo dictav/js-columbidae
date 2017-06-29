@@ -4,19 +4,23 @@
   "description": "Error reporter for Stackdriver or Sentry",
   "main": "src/main.js",
   "scripts": {
-    "test": "npm run test:local",
+    "test": "npm run test:unit && npm run test:e2e:phantom",
     "test:cloud": "npm run test:unit && npm run test:e2e:cloud",
-    "test:local": "npm run test:unit && npm run test:e2e:local",
+    "test:local": "npm run test:unit && npm run test:e2e:phantom",
     "test:unit": "mocha test/unit",
     "test:e2e:phantom": "wdio test/wdio.conf.phantom.js",
     "test:e2e:local": "wdio test/wdio.conf.local.js",
     "test:e2e:cloud": "wdio test/wdio.conf.browserstack.js",
-    "build": "rollup --config rollup.config.js"
+    "build": "npm run build:dist && npm run build:example",
+    "build:dist": "rollup --config rollup.config.js",
+    "build:example": "rollup --config rollup-example.config.js",
+    "watch": "chokidar 'src/*.js' -c 'npm run build'"
   },
   "author": "dictav <dictav@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "body-parser": "^1.17.2",
+    "chokidar-cli": "^1.2.0",
     "express": "^4.15.3",
     "mocha": "^3.4.2",
     "morgan": "^1.8.2",
