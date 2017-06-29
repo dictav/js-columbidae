@@ -22,10 +22,11 @@ var config = {
   }
 }
 
+
 export default {
-  moduleName: pkg.name,
-  entry: 'src/main.js',
-  dest: 'dist/columbidae.js',
+  moduleName: pkg.name + 'Example',
+  entry: 'src/example.js',
+  dest: 'test/public/example.js',
   format: 'umd',
   sourceMap: true,
   legacy: true,

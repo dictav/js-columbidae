@@ -1,6 +1,6 @@
-import { extractException, sendBeacon } from './util'
+import { extractException, sendBeacon } from './util';
 
-import { version } from '../package.json'
+import { version } from '../package.json';
 
 function Sentry(config) {
   // memo: IE8 @_jscript_version == 5.8, IE10 @_jscript_version == 10
@@ -21,7 +21,7 @@ function Sentry(config) {
   this.sendBeacon = config.sendBeacon;
   this.url = "//sentry.io/api/" + config.projectId + "/store/"
     + "?sentry_version=7"
-    + "&sentry_client=simple-reporter%2F" + version
+    + "&sentry_client=ColumbidaeJS%2F" + version
     + "&sentry_key=" + config.key;
   this.payload = {
     project: config.projectId,
@@ -48,7 +48,7 @@ Sentry.prototype.send = function(err) {
   this.payload.extra['session:duration'] = (new Date()).getTime() - this.start;
   this.payload.event_id = id;
 
-  sendBeacon(this.url, JSON.stringify(this.payload))
+  sendBeacon(this.url, JSON.stringify(this.payload));
   return id;
 }
 
