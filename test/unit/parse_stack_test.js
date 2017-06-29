@@ -10,13 +10,13 @@ const want1 = {
       function: '?'
     },
     {
-      filename: 'http://localhost:3000/dist/bundle.js:4:1600',
+      filename: 'http://localhost:3000/dist/bundle.js',
       lineno: 4,
       colno: 1600,
       function: 'Object.e.Crash'
     },
     {
-      filename: 'http://localhost:3000/dist/bundle.js:4:883',
+      filename: 'http://localhost:3000/dist/bundle.js',
       lineno: 4,
       colno: 883,
       function: 's'

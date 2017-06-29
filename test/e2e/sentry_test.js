@@ -1,7 +1,21 @@
 import assert from 'assert'
 import request from 'request'
 
-function getEvent(id, wait=2000) {
+const maxRetry = 5
+
+function getEvent(id, wait=1000, count=0) {
+  if (!id) {
+    return Promise.reject(new Error("id is null"))
+  }
+
+  if (count == 0) {
+    console.log(`fetching ${id}...`)
+  }
+
+  if (count > maxRetry) {
+    return Promise.reject(new Error("over maxRetry"))
+  }
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       request.get({
@@ -14,9 +28,13 @@ function getEvent(id, wait=2000) {
           return
         }
 
+        if (res.statusCode == 404) {
+          console.log('retry', count+1)
+          return resolve(getEvent(id, wait * 2, count+1))
+        }
+
         if (res.statusCode != 200) {
-          reject(new Error(`id:${id} status:${res.statusCode}`))
-          return
+          return reject(new Error(`id:${id} status:${res.statusCode}`))
         }
 
         try {
@@ -31,11 +49,11 @@ function getEvent(id, wait=2000) {
 
 describe('Sentry', () => {
   it('send error', () => {
-    browser.url(process.env.URL1)
+    browser.url(process.env.URL1 || 'http://localhost:3000')
     const eventId = browser.execute(`return window.eventId`).value
 
     const test = () => getEvent(eventId)
-      .catch(err => assert.fail(`should retrive the event: ${eventId}`))
+      .catch(err => assert.fail(`should retrive the event: ${eventId} err: ${err}`))
     browser.call(test)
   })
 })
