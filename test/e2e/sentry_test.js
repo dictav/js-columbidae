@@ -31,7 +31,7 @@ function getEvent(id, wait=2000) {
 
 describe('Sentry', () => {
   it('send error', () => {
-    browser.url('http://9ed5b700.ngrok.io')
+    browser.url(process.env.URL1)
     const eventId = browser.execute(`return window.eventId`).value
 
     const test = () => getEvent(eventId)

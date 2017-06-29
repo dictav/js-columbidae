@@ -1,5 +1,5 @@
 'use strict'
-const browserstack = require('browserstack-local')
+const ngrok = require('ngrok')
 
 const base = require('./_wdio.conf')
 const buildId = 'build-' + Date.now().toString()
@@ -63,7 +63,6 @@ var capabilities = [
   a['browserstack.timezone'] = 'UTC'
   a['browserstack.video'] = false
   a['browserstack.debug'] = true
-  a['browserstack.local'] = true
   return a
 })
 
@@ -81,21 +80,15 @@ exports.config = Object.assign(base.config, {
   onPrepare: (config, capabilities) => {
     require('./server')
     console.log("Connecting local");
+
     return new Promise((resolve, reject) => {
-      exports.bs_local = new browserstack.Local();
-      exports.bs_local.start({'key': exports.config.key }, (error) => {
-        if (error) return reject(error);
-        console.log('Connected. Now testing...');
-
-        resolve();
-      });
-    });
-  },
-
-  // Code to stop browserstack local after end of test
-  onComplete: (capabilties, specs) => {
-    exports.bs_local.stop(() => {
-      // do something
+      ngrok.connect(3000, (err, url) => {
+        if (err) {
+          reject(err)
+        }
+        process.env.URL1 = url
+        resolve()
+      })
     });
   }
 })
