@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:latest
+    working_directory: ~/js-columbidae
+    environment:
+      TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - v1-npm-deps-{{ checksum "package.lock" }}
+      - run: npm install
+			- save_cache:
+        key: v1-npm-deps-{{ checksum "package.lock" }}
+        paths:
+          - node_modules
+      - run: npm run build
+      - run: npm run test:cloud

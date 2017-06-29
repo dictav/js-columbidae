@@ -4,12 +4,14 @@
   "description": "Error reporter for Stackdriver or Sentry",
   "main": "src/main.js",
   "scripts": {
-    "test": "npm run test:unit",
+    "test": "npm run test:local",
+    "test:cloud": "npm run test:unit && npm run test:e2e:cloud",
+    "test:local": "npm run test:unit && npm run test:e2e:local",
     "test:unit": "mocha test/unit",
     "test:e2e:phantom": "wdio test/wdio.conf.phantom.js",
     "test:e2e:local": "wdio test/wdio.conf.local.js",
     "test:e2e:cloud": "wdio test/wdio.conf.browserstack.js",
-    "start": "rollup --config rollup.config.js"
+    "build": "rollup --config rollup.config.js"
   },
   "author": "dictav <dictav@gmail.com>",
   "license": "MIT",
