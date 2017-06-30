@@ -87,7 +87,7 @@ exports.config = Object.assign(base.config, {
         proto: 'http',
         addr: '0.0.0.0:3000',
         bind_tls: true,
-        authtoken: process.env.NGOK_AUTHTOKEN
+        authtoken: process.env.NGROK_AUTHTOKEN
       }
 
       ngrok.connect(opts, (err, url) => {
