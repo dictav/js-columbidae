@@ -80,14 +80,22 @@ exports.config = Object.assign(base.config, {
   // Code to start browserstack local before start of test
   onPrepare: (config, capabilities) => {
     require('./server')
-    console.log("Connecting local");
+    console.log("Connecting ngrok");
 
     return new Promise((resolve, reject) => {
-      ngrok.connect(3000, (err, url) => {
+      let opts = {
+        proto: 'http',
+        addr: '0.0.0.0:3000',
+        bind_tls: true,
+        authtoken: process.env.NGOK_AUTHTOKEN
+      }
+
+      ngrok.connect(opts, (err, url) => {
         if (err) {
           reject(err)
         }
         process.env.URL1 = url
+        console.log('ngrok connected')
         resolve()
       })
     });
