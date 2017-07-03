@@ -17,7 +17,6 @@ var config = {
   toplevel: false,
   ie8: true,
   output: {
-    beautify: true,
     comments: 'some'
   }
 }
