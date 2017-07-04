@@ -87,7 +87,7 @@
             return ("x" === e ? t : 3 & t | 8).toString(16);
         });
     }
-    var c = /at(.*) \(?(.+):(\d+):(\d+)/g, f = /(.*)@(.+):(\d+):(\d+)/g, l = "0.0.1";
+    var c = /at(.*) \(?(.+):(\d+):(\d+)/g, f = /(.*)@(.+):(\d+):(\d+)/g, l = "0.1.0";
     i.prototype.send = function(e) {
         var r = this.uuidv4();
         return this.payload.exception.values.push(n(e)), this.payload.extra["session:duration"] = new Date().getTime() - this.start, 
