@@ -68,7 +68,7 @@ function parseStack(stack) {
   return { frames: frames };
 }
 
-var version = "0.1.0";
+var version = "0.1.3";
 
 function Sentry(config) {
   // memo: IE8 @_jscript_version == 5.8, IE10 @_jscript_version == 10
@@ -108,6 +108,10 @@ function Sentry(config) {
       'session:duration': 0
     }
   };
+
+  if (typeof config.release === 'string') {
+    this.payload.release = config.release;
+  }
 }
 
 Sentry.prototype.send = function(err) {
