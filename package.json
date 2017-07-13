@@ -1,9 +1,10 @@
 {
   "name": "columbidae",
-  "module": "ColumbidaeJS",
-  "version": "0.1.0",
+  "moduleName": "ColumbidaeJS",
+  "version": "0.1.1",
   "description": "Error reporter for Stackdriver or Sentry",
-  "main": "src/main.js",
+  "main": "dist/columbidae.js",
+  "module": "src/main.js",
   "scripts": {
     "test": "npm run test:unit && npm run test:e2e:phantom",
     "test:cloud": "npm run test:unit && npm run test:e2e:cloud",

@@ -22,7 +22,7 @@ var config = {
 }
 
 export default {
-  moduleName: pkg.module,
+  moduleName: pkg.moduleName,
   entry: 'src/main.js',
   dest: 'dist/columbidae.js',
   format: 'umd',

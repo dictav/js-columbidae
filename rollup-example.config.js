@@ -24,7 +24,7 @@ var config = {
 
 
 export default {
-  moduleName: pkg.module + 'Example',
+  moduleName: pkg.moduleNam + 'Example',
   entry: 'src/example.js',
   dest: 'test/public/example.js',
   format: 'umd',
