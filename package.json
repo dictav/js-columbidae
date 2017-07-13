@@ -1,5 +1,6 @@
 {
-  "name": "ColumbidaeJS",
+  "name": "columbidae",
+  "module": "ColumbidaeJS",
   "version": "0.1.0",
   "description": "Error reporter for Stackdriver or Sentry",
   "main": "src/main.js",

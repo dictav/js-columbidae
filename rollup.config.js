@@ -1,5 +1,5 @@
 import json from 'rollup-plugin-json'
-import uglify from 'rollup-plugin-uglify'
+//import uglify from 'rollup-plugin-uglify'
 
 import pkg from './package.json'
 
@@ -22,7 +22,7 @@ var config = {
 }
 
 export default {
-  moduleName: pkg.name,
+  moduleName: pkg.module,
   entry: 'src/main.js',
   dest: 'dist/columbidae.js',
   format: 'umd',
@@ -30,6 +30,6 @@ export default {
   legacy: true,
   plugins: [
     json(),
-    uglify(config)
+//    uglify(config)
   ]
 };
