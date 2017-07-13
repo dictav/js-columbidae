@@ -34,6 +34,7 @@ function getEvent(id, wait=1000, count=0) {
         }
 
         if (res.statusCode != 200) {
+          console.log(res.body);
           return reject(new Error(`id:${id} status:${res.statusCode}`))
         }
 
@@ -48,6 +49,13 @@ function getEvent(id, wait=1000, count=0) {
 }
 
 describe('Sentry', () => {
+  after(() => {
+    const errors = browser.execute('return window.errors').value;
+    if (errors.length > 0) {
+      assert(errors);
+    }
+  });
+
   it('send error', () => {
     browser.url(process.env.URL1 || 'http://localhost:3000')
     const eventId = browser.execute(`return window.eventId`).value

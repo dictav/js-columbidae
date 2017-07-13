@@ -40,6 +40,10 @@ function Sentry(config) {
       'session:duration': 0
     }
   }
+
+  if (typeof config.release === 'string') {
+    this.payload.release = config.release;
+  }
 }
 
 Sentry.prototype.send = function(err) {
